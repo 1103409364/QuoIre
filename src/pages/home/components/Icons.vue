@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
     <swiper-slide v-for="(page, index) of pages" :key="index">
       <div class="icon" v-for="item in page" :key="item.id">
         <div class="icon-img">
@@ -57,7 +57,11 @@ export default {
         id: '009',
         imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/b4511345827006994aa1980a3886f0ac.png',
         desc: '北京世园会'
-      }]
+      }],
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        loop: false
+      }
     }
   },
   computed: {
