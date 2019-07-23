@@ -23,4 +23,6 @@ export default {
       padding 0 .1rem
       border-radius .06rem
       color #666
+      text-align center
+      font-family Arial, Helvetica, sans-serif
 </style>
