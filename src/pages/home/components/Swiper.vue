@@ -1,8 +1,9 @@
 <template>
 <div class="wrapper">
-  <swiper :options="swiperOption">
+  <!--默认图片不是第一张解决方法: 请求成功时再生成 swiper -->
+  <swiper :options="swiperOption" v-if="showSwiper">
     <!-- slides -->
-    <swiper-slide v-for="item of swiperList" :key="item.id">
+    <swiper-slide v-for="item of list" :key="item.id">
       <img class="swiper-img" :src=item.imgUrl alt="p">
     </swiper-slide>
     <!-- Optional controls -->
@@ -15,23 +16,23 @@
 <script>
 export default {
   name: 'HomeSwiper',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
         // 图片分页小点, 传 class 进去
         pagination: '.swiper-pagination',
         loop: true
-      },
-      swiperList: [{
-        id: ' 01',
-        imgUrl: 'http://source.qunarzz.com/site/images/wns/20190626_dujia_homepage_top_banner_5.jpg'
-      }, {
-        id: '02',
-        imgUrl: 'http://source.qunarzz.com/site/images/wns/2019715_dujia_homepage_top_banner_6.jpg'
-      }]
+      }
+    }
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length > 0
     }
   }
-
 }
 </script>
 
@@ -42,7 +43,7 @@ export default {
   overflow hidden
   width 100%
   height 0
-  padding-bottom: 25.60%
+  padding-bottom: 31.20%
   background-color: #999
   .swiper-img
     width 100%

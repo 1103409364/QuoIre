@@ -2,7 +2,7 @@
   <div>
     <div class="title">热销推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of list" :key="item.id">
         <img class="item-img" :src="item.imgUrl" alt="">
         <div class="item-info">
           <p class="item-title">{{item.title}}</p>
@@ -17,30 +17,8 @@
 <script>
 export default {
   name: 'Recommend',
-  data () {
-    return {
-      recommendList: [{
-        id: '001',
-        title: '北京欢乐谷',
-        desc: '这里是学生党名副其实的开心课堂，这里同样是青年情侣的浪漫圣地',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1508/89/895a1b7add84f23faca053ce9e3153db.water.jpg_200x200_99ae30ee.jpg'
-      }, {
-        id: '002',
-        title: '北京欢乐谷',
-        desc: '这里是学生党名副其实的开心课堂，这里同样是青年情侣的浪漫圣地',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1508/89/895a1b7add84f23faca053ce9e3153db.water.jpg_200x200_99ae30ee.jpg'
-      }, {
-        id: '003',
-        title: '北京欢乐谷',
-        desc: '这里是学生党名副其实的开心课堂，这里同样是青年情侣的浪漫圣地',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1508/89/895a1b7add84f23faca053ce9e3153db.water.jpg_200x200_99ae30ee.jpg'
-      }, {
-        id: '004',
-        title: '北京欢乐谷',
-        desc: '这里是学生党名副其实的开心课堂，这里同样是青年情侣的浪漫圣地',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1508/89/895a1b7add84f23faca053ce9e3153db.water.jpg_200x200_99ae30ee.jpg'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>

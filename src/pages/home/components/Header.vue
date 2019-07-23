@@ -8,14 +8,17 @@
     输入城市景点游玩主题
   </div>
   <!-- <router-link to="./city"> -->
-    <div class="header-right">城市</div>
+    <div class="header-right">{{city}}</div>
   <!-- <router-link> -->
 </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  props: {
+    city: String
+  }
 }
 </script>
 

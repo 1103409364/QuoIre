@@ -2,7 +2,7 @@
   <div>
     <div class="title">周末去哪儿</div>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of list" :key="item.id">
         <div class="item-img-wrapper">
           <img class="item-img" :src="item.imgUrl" alt="">
         </div>
@@ -18,30 +18,8 @@
 <script>
 export default {
   name: 'Weekend',
-  data () {
-    return {
-      recommendList: [{
-        id: '001',
-        title: '京城周末撒欢',
-        desc: '在帝都过周末，不仅仅是城中游！',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg'
-      }, {
-        id: '002',
-        title: '京城周末撒欢',
-        desc: '在帝都过周末，不仅仅是城中游！',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg'
-      }, {
-        id: '003',
-        title: '京城周末撒欢',
-        desc: '在帝都过周末，不仅仅是城中游！',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg'
-      }, {
-        id: '004',
-        title: '京城周末撒欢',
-        desc: '在帝都过周末，不仅仅是城中游！',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>
@@ -49,7 +27,6 @@ export default {
 <style lang="stylus" scoped>
   @import '~styles/mixins.styl';
   .title
-    margin-top .2rem
     padding-left .1rem
     line-height .8rem
     background #eee
@@ -57,7 +34,7 @@ export default {
   .item-img-wrapper
     overflow hidden
     height 0
-    padding-bottom 33.9%
+    padding-bottom 37.09%
     .item-img
       width 100%
   .item-info
@@ -73,5 +50,6 @@ export default {
       font-size .22rem
       line-height .4rem
       margin-bottom .16rem
+      color: #999
       ellipsis()
 </style>
