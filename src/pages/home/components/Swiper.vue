@@ -6,6 +6,7 @@
       <img class="swiper-img" :src=item.imgUrl alt="p">
     </swiper-slide>
     <!-- Optional controls -->
+    <!-- 父组件通过 slot 定制 swiper 组件 -->
     <div class="swiper-pagination"  slot="pagination"></div>
   </swiper>
 </div>
