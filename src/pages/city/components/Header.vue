@@ -25,6 +25,7 @@ export default {
     text-align center
     color #fff
     background-color: $bgColor
+    user-select none
     .header-back
       position absolute
       top 0

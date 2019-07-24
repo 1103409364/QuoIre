@@ -41,7 +41,7 @@ export default {
   updated () {
     this.startX = document.documentElement.clientWidth - 5
     this.startY = this.$refs['A'][0].offsetTop + 79
-    this.endY = this.$refs['Z'][0].offsetTop + 79
+    this.endY = this.$refs['Z'][0].offsetTop + 79 + 20
   },
   methods: {
     // 使用触摸事件代替 click
@@ -61,7 +61,7 @@ export default {
       // 优化2:函数节流
       if (this.touchStatus) {
         // 阻止默认事件, 比如下拉刷新
-        // e.preventDefault()
+        e.preventDefault()
         if (this.timer) clearTimeout(this.timer)
         // 使用箭头函数不用备份 this
         // const _this = this
@@ -108,4 +108,5 @@ export default {
       text-align center
       line-height .4rem
       color $bgColor
+      user-select none
 </style>
