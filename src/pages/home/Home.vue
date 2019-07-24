@@ -9,12 +9,13 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState } from 'vuex'
 import HomeHeader from './components/Header'
 import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
-import axios from 'axios'
 export default {
   name: 'Home',
   components: {
@@ -26,23 +27,26 @@ export default {
   },
   data () {
     return {
-      // city: '',
+      lastCity: '', // 上一次的城市
       swiperList: [],
       iconList: [],
       recommendList: [],
       weekendList: []
     }
   },
+  computed: {
+    // 从 vuex 中取数据，当前city 如果要重命名属性 使用对象参数({k:v})
+    ...mapState(['city'])
+  },
   methods: {
     getHomeInfo () {
-      axios.get('/api/index.json')
+      axios.get('/api/index.json?city=' + this.city)
         .then(this.getHomeInfoSuccess)
     },
     getHomeInfoSuccess (res) {
       res = res.data
       if (res.ret && res.data) {
         const data = res.data
-        // this.city = data.city
         this.swiperList = data.swiperList
         this.iconList = data.iconsList
         this.recommendList = data.recommendList
@@ -52,6 +56,15 @@ export default {
   },
   mounted () {
     this.getHomeInfo()
+    this.lastCity = this.city
+  },
+  // 使用 keep-alive 之后, 组件会多一个生命周期 activated
+  activated () {
+    // 当城市发生改变的时候，请求新的数据
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>
