@@ -1,5 +1,6 @@
 <template>
   <div class="list" ref="wrapper">
+    <!-- better-scroll 只能控制一个子节点, 这里包裹一层 div -->
     <div>
       <div class="area">
         <div class="title border-topbottom">当前城市</div>
@@ -17,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="area" v-for="(item, key) of cities" :key="key">
+      <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
           <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">{{innerItem.name}}</div>
@@ -33,10 +34,23 @@ export default {
   name: 'CityList',
   props: {
     hot: Array,
-    cities: Object // 对象
+    cities: Object, // 对象
+    letter: String
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.wrapper)
+  },
+  watch: {
+    // 监听 letter, 下面是 es6 的写法, 属性值变量一致可以缩写
+    letter () {
+      if (this.letter) {
+        // console.log(this.$refs[this.letter])
+        // ref 在循环里, 获得的是数组
+        const el = this.$refs[this.letter][0]
+        // better-scroll 提供的接口, 参数要求是 dom 元素或者选择器
+        this.scroll.scrollToElement(el)
+      }
+    }
   }
 }
 </script>
