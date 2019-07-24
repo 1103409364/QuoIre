@@ -92,7 +92,7 @@ export default {
           border-radius .06rem
     .item-list
       .item
-        line-height .46rem
+        line-height .76rem
         color #666666
-        padding .2rem
+        padding-left .2rem
 </style>
