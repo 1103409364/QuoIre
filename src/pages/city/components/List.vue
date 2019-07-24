@@ -6,14 +6,19 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wraper">
-            <div class="button">北京</div>
+            <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wraper" v-for="item of hot" :key="item.id">
+          <div
+            class="button-wraper"
+            v-for="item of hot"
+            :key="item.id"
+            @click="handleCityClick(item.name)"
+          >
             <div class="button">{{item.name}}</div>
           </div>
         </div>
@@ -21,7 +26,12 @@
       <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
-          <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">{{innerItem.name}}</div>
+          <div
+            class="item border-bottom"
+            v-for="innerItem of item"
+            :key="innerItem.id"
+            @click="handleCityClick(innerItem.name)"
+          >{{innerItem.name}}</div>
         </div>
       </div>
     </div>
@@ -30,6 +40,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'CityList',
   props: {
@@ -37,8 +48,11 @@ export default {
     cities: Object, // 对象
     letter: String
   },
-  mounted () {
-    this.scroll = new BScroll(this.$refs.wrapper)
+  // mapState 参数也可以是对象
+  computed: {
+    ...mapState({
+      currentCity: 'city'
+    })
   },
   watch: {
     // 监听 letter, 下面是 es6 的写法, 属性值变量一致可以缩写
@@ -51,6 +65,25 @@ export default {
         this.scroll.scrollToElement(el)
       }
     }
+  },
+  methods: {
+    handleCityClick (city) {
+      // this.$store.dispatch('changeCity', city)
+      // this.$store.commit('changeCity', city)
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    // 把 mutation 映射到组件中 changeCity 这个方法里，相当于给组件新增了一个方法
+    ...mapMutations(['changeCity'])
+  },
+  mounted () {
+    const options = {
+      mouseWheel: true,
+      click: true,
+      taps: true
+    }
+
+    this.scroll = new BScroll(this.$refs.wrapper, options)
   }
 }
 </script>

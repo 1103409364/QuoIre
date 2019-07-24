@@ -9,6 +9,7 @@
     </div>
     <router-link to="./city">
       <div class="header-right">
+        <!-- 直接从 store 中取数据 -->
         {{this.city}}
       </div>
     </router-link>
@@ -16,10 +17,13 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  // 通过 mapState 把 city 属性映射到组件的计算属性
+  computed: {
+    ...mapState(['city']),
+    ...mapGetters(['doubleCity'])
   }
 }
 </script>
@@ -50,10 +54,11 @@ export default {
       color #ccc
     .header-right
       box-sizing border-box
-      width 1.24rem
-      float left
-      text-align left
-      padding-left .15rem
+      min-width 1.04rem
+      float right
+      text-align center
+      padding-left .1rem
+      padding-right .5rem
       position relative
       color #fff
       &:after
@@ -61,7 +66,7 @@ export default {
         height 0
         content ''
         position absolute
-        right .15rem
+        right .1rem
         top .3575rem
         border .15rem solid #fff
         border-bottom  none

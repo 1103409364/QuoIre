@@ -61,7 +61,7 @@ export default {
       // 优化2:函数节流
       if (this.touchStatus) {
         // 阻止默认事件, 比如下拉刷新
-        e.preventDefault()
+        // e.preventDefault()
         if (this.timer) clearTimeout(this.timer)
         // 使用箭头函数不用备份 this
         // const _this = this

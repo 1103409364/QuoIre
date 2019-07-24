@@ -11,7 +11,12 @@
     <!-- 有关键词的时候显示 -->
     <div class="search-content" ref="search" v-show="keyword">
       <ul>
-        <li class="search-item border-bottom" v-for="item of list" :key="item.id">
+        <li
+          class="search-item border-bottom"
+          v-for="item of list"
+          :key="item.id"
+          @click="handleCityClick(item.name)"
+        >
           {{item.name}}
         </li>
         <li class="search-item border-bottom" v-show="hasNoData">
@@ -25,6 +30,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapMutations } from 'vuex'
 export default {
   name: 'CitySearch',
   props: {
@@ -57,6 +63,8 @@ export default {
         const result = []
         for (let i in this.cities) {
           this.cities[i].forEach(value => {
+            // 去除空格
+            this.keyword = this.keyword.trim()
             // 检查关键词是否包含拼音或者地名的汉字
             if (value.spell.indexOf(this.keyword) > -1 || value.name.indexOf(this.keyword) > -1) {
               result.push(value)
@@ -67,8 +75,22 @@ export default {
       }, 100)
     }
   },
+  methods: {
+    handleCityClick (city) {
+      // this.$store.dispatch('changeCity', city)
+      // this.$store.commit('changeCity', city)
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
+  },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.search)
+    const options = {
+      mouseWheel: true,
+      click: true,
+      taps: true
+    }
+    this.scroll = new Bscroll(this.$refs.search, options)
   }
 }
 </script>

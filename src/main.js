@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './store/index'
 import 'swiper/dist/css/swiper.css'
 // 使用 styles 别名, 在 webpack.base.conf.js 中配置
 import 'styles/reset.css'
@@ -19,6 +20,7 @@ Vue.use(VueAwesomeSwiper /* { default global options } */)
 new Vue({
   el: '#app',
   router,
+  store, // 使用 store
   components: { App },
   template: '<App/>'
 })
