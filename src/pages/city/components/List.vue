@@ -70,6 +70,7 @@ export default {
     handleCityClick (city) {
       // this.$store.dispatch('changeCity', city)
       // this.$store.commit('changeCity', city)
+      // 改变state 中的数据
       this.changeCity(city)
       this.$router.push('/')
     },

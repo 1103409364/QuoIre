@@ -35,7 +35,8 @@ export default {
     }
   },
   computed: {
-    // 从 vuex 中取数据，当前city 如果要重命名属性 使用对象参数({k:v})
+    // 映射到 vuex 中的 city 当前城市,如果要重命名 city 属性 使用对象参数({k:v})
+    // state 中的数据会被城市选择页改变,
     ...mapState(['city'])
   },
   methods: {
@@ -56,6 +57,7 @@ export default {
   },
   mounted () {
     this.getHomeInfo()
+    // city 从计算属性中来
     this.lastCity = this.city
   },
   // 使用 keep-alive 之后, 组件会多一个生命周期 activated
