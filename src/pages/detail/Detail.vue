@@ -2,19 +2,42 @@
   <div>
     <detail-banner></detail-banner>
     <detail-header></detail-header>
-    <div class="content"></div>
+    <div class="content">
+      <detail-list :list="list"></detail-list>
+    </div>
   </div>
 </template>
 
 <script>
 import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
+import DetailList from './components/List'
 
 export default {
   name: 'Detail',
   components: {
     DetailBanner,
-    DetailHeader
+    DetailHeader,
+    DetailList
+  },
+  data () {
+    return {
+      list: [{
+        title: '成人票',
+        children: [{
+          title: '成人三管联票',
+          children: [{
+            title: '成人三管联票-xx连锁店'
+          }]
+        }, {
+          title: '成人五管联票'
+        }]
+      }, {
+        title: '老人票'
+      }, {
+        title: '儿童票'
+      }]
+    }
   }
 }
 </script>
