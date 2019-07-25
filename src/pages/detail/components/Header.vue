@@ -42,6 +42,10 @@ export default {
   },
   activated () {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  // keep-alive 提供的另一个生命周期函数,页面即将被替换或者隐藏的时候执行
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
