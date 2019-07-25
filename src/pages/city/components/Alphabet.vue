@@ -70,8 +70,6 @@ export default {
           let letter = ''
           // console.log(this.startY, this.endY)
           if (e.touches[0].clientY < this.endY && e.touches[0].clientY > this.startY) {
-            console.log(1)
-
             letter = document.elementFromPoint(this.startX, e.touches[0].clientY).innerText
           }
 
