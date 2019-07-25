@@ -1,6 +1,10 @@
 <template>
   <div>
-    <detail-banner></detail-banner>
+    <detail-banner
+      :sightName="sightName"
+      :bannerImg="bannerImg"
+      :gallaryImgs="gallaryImgs"
+    ></detail-banner>
     <detail-header></detail-header>
     <div class="content">
       <detail-list :list="list"></detail-list>
@@ -9,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailList from './components/List'
@@ -22,21 +27,43 @@ export default {
   },
   data () {
     return {
-      list: [{
-        title: '成人票',
-        children: [{
-          title: '成人三管联票',
-          children: [{
-            title: '成人三管联票-xx连锁店'
-          }]
-        }, {
-          title: '成人五管联票'
-        }]
-      }, {
-        title: '老人票'
-      }, {
-        title: '儿童票'
-      }]
+      sightName: '',
+      bannerImg: '',
+      gallaryImgs: [],
+      list: [],
+      // 缓存 id
+      lastId: ''
+    }
+  },
+  methods: {
+    getDetailInfo () {
+      // axios.get('/api/detail.json?=id' + this.$route.params.id)
+      axios.get('/api/detail.json', {
+        params: {
+          id: this.$route.params.id
+        }
+      }).then(this.handleGetDateSucc)
+    },
+    handleGetDateSucc (res) {
+      res = res.data
+      if (res.ret && res.data) {
+        const data = res.data
+        this.sightName = data.sightName
+        this.bannerImg = data.bannerImg
+        this.gallaryImgs = data.gallaryImgs
+        this.list = data.categoryList
+      }
+    }
+  },
+  mounted () {
+    this.getDetailInfo()
+    this.lastId = this.$route.params.id
+  },
+  activated () {
+    // id 变的时候重新请求数据, 解决缓存带来的副作用
+    if (this.lastId !== this.$route.params.id) {
+      this.lastId = this.$route.params.id
+      this.getDetailInfo()
     }
   }
 }
@@ -44,5 +71,5 @@ export default {
 
 <style lang="stylus" scoped>
   .content
-    height 50rem
+    // height 50rem
 </style>

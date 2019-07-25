@@ -18,8 +18,15 @@ export default new Router({
       component: City
     }, {
       path: '/detail/:id',
-      name: 'detail',
+      name: 'Detail',
       component: Detail
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    // console.log(to, from, savedPosition)
+    // 进入详情页回到顶部
+    if (to.name === 'Detail') {
+      return { x: 0, y: 0 }
+    }
+  }
 })

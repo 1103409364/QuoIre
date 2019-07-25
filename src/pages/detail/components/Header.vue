@@ -43,7 +43,7 @@ export default {
   activated () {
     window.addEventListener('scroll', this.handleScroll)
     // 回到顶部
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
   },
   // keep-alive 提供的另一个生命周期函数,页面即将被替换或者隐藏的时候执行
   deactivated () {
