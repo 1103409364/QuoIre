@@ -1,11 +1,12 @@
 <template>
-  <ul class="list">
+  <!-- 阻止 ul 空白区域下拉刷新 -->
+  <ul class="list" @touchstart.prevent="">
     <li
       class="item"
       v-for="(item, key) of cities"
       :key="key"
       :ref="key"
-      @touchstart="handleTouchStart"
+      @touchstart.prevent="handleTouchStart"
       @touchmove="handleTouchMove"
       @touchend="handleTouchEnd"
     >{{key}}</li>
@@ -61,7 +62,7 @@ export default {
       // 优化2:函数节流
       if (this.touchStatus) {
         // 阻止默认事件, 比如下拉刷新
-        e.preventDefault()
+        // e.preventDefault()
         if (this.timer) clearTimeout(this.timer)
         // 使用箭头函数不用备份 this
         // const _this = this
